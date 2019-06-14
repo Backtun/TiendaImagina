@@ -1,0 +1,63 @@
+// Crear nuevo proyecto '-o' indica el nombre del proyecto
+	- dotnet new mvc -o DotNetName
+
+// Consulta comando en documentación oficial (sitio web)
+	- dotnet help 'new' 
+
+// Mostrar información por consola del comando 'dotnet new'
+	- dotnet new -h 
+	- dotnet new --help
+
+// Compila la aplicación y publica el conjunto resultante de archivos en un directorio
+	- dotnet publish WebDotnet
+
+// Comando utiliza NuGet para restaurar las dependencias y herramientas específicas de un proyecto especificadas en el project.json
+	- dotnet restore
+
+// Compila el proyecto y lo empaqueta en un paquete NuGet.
+	- dotnet pack
+
+// Compila el proyecto y toda sus dependencias
+	- dotnet build
+
+// Correr aplicación
+	- dotnet run
+
+// Limpia la salida de la compilación anterior
+	- dotnet clean
+
+// Se utiliza para gestionar proyectos dentro de un archivo solución, un archivo solución es un directorio donde se guardan proyectos del mismo contexto en Visual Studio
+	- dotnet sln
+
+// Agregue un proyecto de C# a una solución:
+	- dotnet sln todo.sln add todo-app/todo-app.csproj
+
+// Quite un proyecto de C# de una solución:
+	- dotnet sln todo.sln remove todo-app/todo-app.csproj
+
+// Añadir paquete JQuery mediante la página de Nugget
+	- dotnet add package jQuery --version 3.4.1
+
+// Remover paquete Nugget
+	- dotnet remove package jQuery
+
+// Referencias entre proyectos
+'dotnet add reference' añadir una referencia.
+'dotnet remove reference' eliminar una referencia.
+'dotnet list reference' listar referencias.
+
+// Listamos las referencias de nuestro proyecto
+	- dotnet list reference
+
+// Eliminar referencias de proyectos
+	- dotnet remove reference ../WebDotnet2/WebDotnet2.csproj
+
+// Migrar el código que hemos escrito en el modelo a la base de datos
+	- dotnet ef migrations add Producto 
+	- dotnet ef database update 
+
+// Migrar la base de datos para aplicar los cambios en el modelo
+	- dotnet ef migrations add ProductosCategoria
+
+// Migra un proyecto .NET Core válido basado en project.json de versión anterior a la 2 a un proyecto SDK 1.0 de .NET Core csproj
+	- dotnet migrate
