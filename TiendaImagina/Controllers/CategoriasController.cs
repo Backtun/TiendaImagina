@@ -51,10 +51,26 @@ namespace TiendaImagina.Controllers
         // POST: Categorias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*Este atributo indica que sólo recibirá peticiones de método POST*/
         [HttpPost]
+        /*
+        *Este atributo genera un unica cookie en tu navegador 
+        *y luego en el mismo formulario, si la cookie no coincide 
+        *cuando se hace submit te envía un error. 
+        *Se utiliza para evitar falsificaciones de solicitudes entre sitios
+        */
         [ValidateAntiForgeryToken]
+        /*
+        *El método recibe la información de la petición y anexiona la información
+        *a un objeto del tipo Categoria.
+        */
         public async Task<IActionResult> Create([Bind("CategoriaId,Nombre,Fecha")] Categoria categoria)
         {
+            /*
+            *Revisa el estado del objeto que recibe el controlador
+            *Si es correcto guardará los datos en la base de datos
+            *Si no es correcto lanzará un mensaje de error en el campo correspondiente
+            */
             if (ModelState.IsValid)
             {
                 _context.Add(categoria);
@@ -64,14 +80,15 @@ namespace TiendaImagina.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Categorias/Edit/id
         public async Task<IActionResult> Edit(long? id)
         {
+            //si id es null devuelve un not found.
             if (id == null)
             {
                 return NotFound();
             }
-
+            //Crea una varible con la categoría seleccionada cogiendo la id que le pasa el método.
             var categoria = await _context.Categoria.FindAsync(id);
             if (categoria == null)
             {
@@ -80,7 +97,7 @@ namespace TiendaImagina.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Categorias/Edit/id
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -91,9 +108,9 @@ namespace TiendaImagina.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
+                //Comprueba la posible salida de errores SQL y realiza el cambio en la entidad categoría.
                 try
                 {
                     _context.Update(categoria);
@@ -116,13 +133,13 @@ namespace TiendaImagina.Controllers
         }
 
         // GET: Categorias/Delete/5
+        //Este método es el mismo que el de editar pero aplicado a la vista delete
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var categoria = await _context.Categoria
                 .FirstOrDefaultAsync(m => m.CategoriaId == id);
             if (categoria == null)
@@ -138,8 +155,11 @@ namespace TiendaImagina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
+            //Crea una variable de categoria buscando por la id.
             var categoria = await _context.Categoria.FindAsync(id);
+            //Prepara una sentencia para remover de la entidad la categoria correspondiente a la id.
             _context.Categoria.Remove(categoria);
+            //Lanza los cambios a la base de datos.
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

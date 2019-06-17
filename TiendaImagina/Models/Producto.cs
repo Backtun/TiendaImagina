@@ -22,5 +22,9 @@ namespace TiendaImagina.Models
         public long CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
 
+        /* esta lista conforma la relación manyToOne 
+        entre Producto y Comentario*/
+        public List<Comentario> Comentarios { get; set; }
+
     }
 }
