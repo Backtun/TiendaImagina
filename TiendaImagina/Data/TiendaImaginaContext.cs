@@ -17,5 +17,7 @@ namespace TiendaImagina.Models
         public DbSet<TiendaImagina.Models.Producto> Producto { get; set; }
 
         public DbSet<TiendaImagina.Models.Categoria> Categoria { get; set; }
+
+        public DbSet<TiendaImagina.Models.Comentario> Comentario { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using TiendaImagina.Models;
 namespace TiendaImagina.Migrations
 {
     [DbContext(typeof(TiendaImaginaContext))]
-    [Migration("20190614170842_ProductosCategoria")]
-    partial class ProductosCategoria
+    [Migration("20190704155603_Prueba")]
+    partial class Prueba
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,27 @@ namespace TiendaImagina.Migrations
                     b.ToTable("Categoria");
                 });
 
+            modelBuilder.Entity("TiendaImagina.Models.Comentario", b =>
+                {
+                    b.Property<long>("ComentarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<string>("NombreUsuario");
+
+                    b.Property<long>("ProductoId");
+
+                    b.Property<string>("Texto");
+
+                    b.HasKey("ComentarioId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("Comentario");
+                });
+
             modelBuilder.Entity("TiendaImagina.Models.Producto", b =>
                 {
                     b.Property<long>("ProductoId")
@@ -55,6 +76,14 @@ namespace TiendaImagina.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Producto");
+                });
+
+            modelBuilder.Entity("TiendaImagina.Models.Comentario", b =>
+                {
+                    b.HasOne("TiendaImagina.Models.Producto", "Producto")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TiendaImagina.Models.Producto", b =>

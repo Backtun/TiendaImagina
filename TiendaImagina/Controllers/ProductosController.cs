@@ -155,5 +155,29 @@ namespace TiendaImagina.Controllers
         {
             return _context.Producto.Any(e => e.ProductoId == id);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ComentariosProducto(long id,
+[Bind("ComentarioId,Texto,NombreUsuario,ProductoId")] Comentario comentario)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            //buscamos producto por id
+            var producto = await _context.Producto
+                .FirstOrDefaultAsync(P => P.ProductoId == id);
+            //comprobamos si el modelo es válido
+            if (ModelState.IsValid)
+            {
+                //guardamos en la base de datos el comentario
+                _context.Comentario.Add(comentario);
+                await _context.SaveChangesAsync();
+            }
+            //redireccionamos a índice
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
