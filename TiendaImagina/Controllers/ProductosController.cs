@@ -21,9 +21,10 @@ namespace TiendaImagina.Controllers
         // GET: Productos
         public async Task<IActionResult> Index()
         {
-            var tiendaImaginaContext = _context.Producto.Include(p => p.Categoria);
+            var tiendaImaginaContext = _context.Producto.Include(p => p.Categoria).Include(c => c.Comentarios);
             return View(await tiendaImaginaContext.ToListAsync());
         }
+
 
         // GET: Productos/Details/5
         public async Task<IActionResult> Details(long? id)

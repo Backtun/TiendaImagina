@@ -48,6 +48,24 @@
                 <a asp-action="Delete" asp-route-id="@item.ProductoId">Delete</a>
             </td>
         </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            @foreach (var comentario in item.Comentarios)
+            {
+                <td>
+                    <i>
+                        @comentario.NombreUsuario
+                    </i>
+                    <br />
+                    <p>
+                        @comentario.Texto
+                    </p>
+                </td>
+            }
+        </tr>
+}        
 }
     </tbody>
 </table>
