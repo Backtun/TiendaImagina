@@ -4,11 +4,11 @@
 
 <div class="text-center">
     @*<h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 
     <h1>Mi Flickr</h1>
     <div id="imagenes"></div>
-    <button id="botonfli" >Dibujar</button>
+    <button id="botonfli">Dibujar</button>
     <select id="selector">
         <option value="landscapes">Paisajes</option>
         <option value="puppies">Cachorro</option>
@@ -16,3 +16,30 @@
         <option value="cats%20with%20hats">Gatetes</option>
     </select>
 </div>
+
+<div class="container">
+    <div class="row"> </div>
+    <div class="row">
+        <div class="col-6"> </div>
+        <div class="col-6">
+            Usuario <input type="text" id="userInput" />
+            <br />
+            mensaje <input type="text" id="messageInput" />
+            <input type="button" id="sendButton" value="Enviar mensaje" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6"> </div>
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+</div>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+

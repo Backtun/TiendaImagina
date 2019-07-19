@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using TiendaImagina.Models;
+using TiendaImagina.Hubs;
 
 namespace TiendaImagina
 {
@@ -33,6 +34,15 @@ namespace TiendaImagina
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSignalR();
+            //services.AddSignalR()
+            //    .AddMessagePackProtocol(options =>
+            //    {
+            //        options.FormatterResolvers = new List<MessagePack.IFormatterResolver>()
+            //        {
+            //            MessagePack.Resolvers.StandardResolver.Instance
+            //        };
+            //    });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -63,6 +73,11 @@ namespace TiendaImagina
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<ChatHub>("/chatHub");
             });
         }
     }
